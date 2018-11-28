@@ -1,3 +1,6 @@
+const APIUtil = require ('./api_util.js');
+
+
 class FollowToggle {
   constructor(el) {
     this.$el = $(el);
@@ -21,19 +24,16 @@ class FollowToggle {
       event.preventDefault();
       let request;
       if (this.followState === 'unfollowed') {
-        request = 'POST';
         this.followState = 'followed';
+        APIUtil.followUser(this.userId).then( () => {
+          this.render();
+        });
       } else {
-        request = 'DELETE';
         this.followState = 'unfollowed';
+        APIUtil.unfollowUser(this.userId).then( () => {
+          this.render();
+        });
       }
-      $.ajax({
-        method: request,
-        url: `/users/${this.userId}/follow`,
-        dataType: 'JSON'
-      }).then( () => {
-        this.render();
-      });
     });
   }
 
