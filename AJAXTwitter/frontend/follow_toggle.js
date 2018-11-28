@@ -18,9 +18,11 @@ class FollowToggle {
   handleClick() {
     this.$el.on('click', (event) => {
       event.preventDefault();
-
+      let request = this.followState ? 'DELETE' : 'POST';
       $.ajax({
-
+        method: request,
+        url: `/users/${this.userId}/follow`,
+        dataType: 'JSON'
       });
     });
   }
