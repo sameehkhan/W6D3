@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-
+throw new Error("Module parse failed: The keyword 'let' is reserved (4:2)\nYou may need an appropriate loader to handle this file type.\n| \n| $({\n>   let $el = ('.follow-toggle');\n| });\n| ");
 
 /***/ })
 
