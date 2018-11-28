@@ -86,14 +86,79 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/follow_toggle.js":
+/*!***********************************!*\
+  !*** ./frontend/follow_toggle.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+class FollowToggle {
+  constructor(el) {
+    this.$el = $(el);
+    this.userId = this.$el.data('user-id');
+    this.followState = this.$el.data('initial-follow-state');
+    this.render();
+    this.handleClick();
+  }
+
+  render() {
+    if (this.followState === 'unfollowed'){
+      this.$el.text('Follow!');
+    }
+    else if (this.followState === 'followed'){
+      this.$el.text('Unfollow!');
+    }
+  }
+
+  handleClick() {
+    this.$el.on('click', (event) => {
+      event.preventDefault();
+      let request;
+      if (this.followState === 'unfollowed') {
+        request = 'POST';
+        this.followState = 'followed';
+      } else {
+        request = 'DELETE';
+        this.followState = 'unfollowed';
+      }
+      $.ajax({
+        method: request,
+        url: `/users/${this.userId}/follow`,
+        dataType: 'JSON'
+      }).then( () => {
+        this.render();
+      });
+    });
+  }
+
+
+
+}
+
+
+
+module.exports = FollowToggle;
+
+
+/***/ }),
+
 /***/ "./frontend/twitter.js":
 /*!*****************************!*\
   !*** ./frontend/twitter.js ***!
   \*****************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module parse failed: The keyword 'let' is reserved (4:2)\nYou may need an appropriate loader to handle this file type.\n| \n| $({\n>   let $el = ('.follow-toggle');\n| });\n| ");
+const FollowToggle = __webpack_require__ (/*! ./follow_toggle.js */ "./frontend/follow_toggle.js");
+
+$( ()=> {
+  let $el = $('.follow-toggle');
+  $el.each((idx, el) => {
+    new FollowToggle(el);
+  });
+});
+
 
 /***/ })
 
