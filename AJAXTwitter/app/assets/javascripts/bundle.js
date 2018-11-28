@@ -86,6 +86,28 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/api_util.js":
+/*!******************************!*\
+  !*** ./frontend/api_util.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+const APIUtil = {
+  followUser: id => {
+    // ...
+  },
+
+  unfollowUser: id => {
+    // ...
+  }
+};
+
+module.exports = APIUtil;
+
+
+/***/ }),
+
 /***/ "./frontend/follow_toggle.js":
 /*!***********************************!*\
   !*** ./frontend/follow_toggle.js ***!
@@ -126,7 +148,9 @@ class FollowToggle {
         method: request,
         url: `/users/${this.userId}/follow`,
         dataType: 'JSON'
-      }).then(this.render());
+      }).then( () => {
+        this.render();
+      });
     });
   }
 
@@ -149,6 +173,8 @@ module.exports = FollowToggle;
 /***/ (function(module, exports, __webpack_require__) {
 
 const FollowToggle = __webpack_require__ (/*! ./follow_toggle.js */ "./frontend/follow_toggle.js");
+const APIUtil = __webpack_require__ (/*! ./api_util.js */ "./frontend/api_util.js");
+
 
 $( ()=> {
   let $el = $('.follow-toggle');
