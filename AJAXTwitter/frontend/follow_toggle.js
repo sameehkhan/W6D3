@@ -18,12 +18,18 @@ class FollowToggle {
   handleClick() {
     this.$el.on('click', (event) => {
       event.preventDefault();
-      let request = this.followState ? 'DELETE' : 'POST';
+      if (this.followState === 'unfollowed') {
+        let request = 'POST';
+        this.followState = 'followed';
+      } else {
+        let request = 'DELETE';
+        this.followState = 'unfollowed';
+      }
       $.ajax({
         method: request,
         url: `/users/${this.userId}/follow`,
         dataType: 'JSON'
-      });
+      }).then(render());
     });
   }
 
