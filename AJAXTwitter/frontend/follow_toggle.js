@@ -31,9 +31,7 @@ class FollowToggle {
         method: request,
         url: `/users/${this.userId}/follow`,
         dataType: 'JSON'
-      }).then( () => {
-        this.render();
-      });
+      }).then(this.render());
     });
   }
 
