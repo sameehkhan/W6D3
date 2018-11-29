@@ -96,7 +96,7 @@
 const APIUtil = {
   followUser: id => {
     // ...
-    $.ajax({
+    return $.ajax({
       method: 'POST',
       url: `/users/${id}/follow`,
       dataType: 'JSON'
@@ -104,7 +104,7 @@ const APIUtil = {
   },
 
   unfollowUser: id => {
-    $.ajax({
+    return $.ajax({
       method: 'DELETE',
       url: `/users/${id}/follow`,
       dataType: 'JSON'
